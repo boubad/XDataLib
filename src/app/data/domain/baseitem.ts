@@ -4,8 +4,8 @@ import InfoData = require("../../../infodata.d");
 class BaseItem implements InfoData.IBaseItem {
   public id: string;
   public rev: string;
-  public attachments:any;
-  public avatarid:string;
+  public attachments: any;
+  public avatarid: string;
   //
   constructor(oMap?: any) {
     this.id = null;
@@ -19,10 +19,10 @@ class BaseItem implements InfoData.IBaseItem {
       if (oMap._rev !== undefined) {
         this.rev = oMap._rev;
       }
-      if (oMap.avatarid !== undefined){
+      if (oMap.avatarid !== undefined) {
         this.avatarid = oMap.avatarid;
       }
-      if (oMap._attachments !== undefined){
+      if (oMap._attachments !== undefined) {
         this.attachments = oMap._attachments;
       }
     }
@@ -30,27 +30,27 @@ class BaseItem implements InfoData.IBaseItem {
   public get base_prefix(): string {
     return null;
   }
-  public get index_name():string{
+  public get index_name(): string {
     return (this.collection_name !== null) ?
-    this.collection_name + '/by_id' : null;
+      this.collection_name + '/by_id' : null;
   }
-  public create_id():  string{
-    var n:number = Math.floor(Math.random() * 10000.0);
+  public create_id(): string {
+    var n: number = Math.floor(Math.random() * 10000.0);
     var sn = '' + n;
-    while(sn.length < 4){
+    while (sn.length < 4) {
       sn = '0' + sn;n
     }
-    var s:string = ((new Date()).toISOString()).substr(0,10) + '-' + sn;
+    var s: string = ((new Date()).toISOString()).substr(0, 10) + '-' + sn;
     return (this.base_prefix !== null) ?
-    this.base_prefix + '-' + s : s;
+      this.base_prefix + '-' + s : s;
   }// create_id
   public static check_date(d: Date): Date {
     var dRet: Date = null;
     if ((d !== undefined) && (d !== null)) {
-       var t = Date.parse(d.toString());
-       if (!isNaN(t)){
-         dRet = d;
-       }
+      var t = Date.parse(d.toString());
+      if (!isNaN(t)) {
+        dRet = d;
+      }
     }
     return dRet;
   }// check_date
@@ -64,22 +64,22 @@ class BaseItem implements InfoData.IBaseItem {
     return (this.type !== null) && (this.collection_name !== null);
   }
   public to_insert_map(oMap: any): void {
-    if ((this.id !== undefined) && (this.id !== null)){
+    if ((this.id !== undefined) && (this.id !== null)) {
       oMap._id = this.id;
     }
-    if ((this.rev !== undefined) && (this.rev !== null)){
+    if ((this.rev !== undefined) && (this.rev !== null)) {
       oMap._rev = this.rev;
     }
-    if ((this.type !== undefined) && (this.type !== null)){
+    if ((this.type !== undefined) && (this.type !== null)) {
       oMap.type = this.type;
     }
-    if ((this.avatarid !== undefined) && (this.avatarid !== null)){
+    if ((this.avatarid !== undefined) && (this.avatarid !== null)) {
       oMap.avatarid = this.avatarid;
     }
   }
   public to_fetch_map(oMap: any): void {
     this.to_insert_map(oMap);
-    if ((this.attachments !== undefined) && (this.attachments !== null)){
+    if ((this.attachments !== undefined) && (this.attachments !== null)) {
       oMap._attachments = this.attachments;
     }
   }
@@ -153,24 +153,24 @@ class BaseItem implements InfoData.IBaseItem {
       }// val
     }
   }// _array_add
-  public sort_func(p1:InfoData.IBaseItem, p2:InfoData.IBaseItem): number {
-        var vRet = -1;
-        if ((p1 !== undefined) && (p2 !== undefined) && (p1 !== null) && (p2 !== null)) {
-            if ((p1.id !== undefined) && (p1.id !== null)) {
-                if ((p2.id !== undefined) && (p2.id !== null)) {
-                    var s1 = p1.id.toString();
-                    var s2 = p2.id.toString();
-                    vRet = s1.localeCompare(s2);
-                } else {
-                    vRet = 1;
-                }
-            } else {
-                vRet = 1;
-            }
-        } else if ((p1 === undefined) || (p1 === null)) {
-            vRet = 1;
+  public sort_func(p1: InfoData.IBaseItem, p2: InfoData.IBaseItem): number {
+    var vRet = -1;
+    if ((p1 !== undefined) && (p2 !== undefined) && (p1 !== null) && (p2 !== null)) {
+      if ((p1.id !== undefined) && (p1.id !== null)) {
+        if ((p2.id !== undefined) && (p2.id !== null)) {
+          var s1 = p1.id.toString();
+          var s2 = p2.id.toString();
+          vRet = s1.localeCompare(s2);
+        } else {
+          vRet = 1;
         }
-        return vRet;
-    } // sort_func
+      } else {
+        vRet = 1;
+      }
+    } else if ((p1 === undefined) || (p1 === null)) {
+      vRet = 1;
+    }
+    return vRet;
+  } // sort_func
 }// class BaseItem
 export = BaseItem;
