@@ -25,3 +25,9 @@ build/Release
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules
+.c9
+.zedstate
+src/app/data/**/*.js
+src/test/**/*.js
+spec/**/*.js
+xxx

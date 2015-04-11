@@ -1,0 +1,29 @@
+{
+    "version": "1.5.0-alpha",
+    "compilerOptions": {
+        "target": "es5",
+        "module": "amd",
+        "declaration": false,
+        "noImplicitAny": false,
+        "removeComments": true,
+        "noLib": false
+    },
+    "filesGlob": [
+        "./**/*.ts",
+        "typings/**/*.ts",
+        "!./node_modules/**/*.ts"
+    ],
+    "files": [
+        "./src/app/data/domain/baseitem.ts",
+        "./src/infodata.d.ts",
+        "./src/test/data/domain/baseitem-test.ts",
+        "./typings/jquery/jquery.d.ts",
+        "./typings/pouchdb/pouchdb.d.ts",
+        "./typings/q/Q.d.ts",
+        "./typings/qunit/qunit.d.ts",
+        "typings/jquery/jquery.d.ts",
+        "typings/pouchdb/pouchdb.d.ts",
+        "typings/q/Q.d.ts",
+        "typings/qunit/qunit.d.ts"
+    ]
+}
