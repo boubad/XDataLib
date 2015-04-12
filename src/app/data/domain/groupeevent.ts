@@ -1,0 +1,173 @@
+//groupeevent.ts
+//
+import InfoData = require('../../../infodata');
+//
+import BaseItem = require('./baseitem');
+import BaseEvent = require('./baseevent');
+//
+class GroupeEvent extends BaseEvent implements InfoData.IGroupeEvent {
+  //
+  private _profaff: string;
+  private _prof: string;
+  private _name: string;
+  private _location: string;
+  private _start: Date;
+  private _end: Date;
+  private _coef: number;
+  //
+  constructor(oMap?: any) {
+    super(oMap);
+    this._profaff = null;
+    this._prof = null;
+    this._name = null;
+    this._location = null;
+    this._start = null;
+    this._end = null;
+    this._coef = null;
+    if ((oMap !== undefined) && (oMap !== null)) {
+      if (oMap.profaffectationid !== undefined) {
+        this.profaffectationid = oMap.profaffectationid;
+      }
+      if (oMap.enseignantid !== undefined) {
+        this.enseignantid = oMap.enseignantid;
+      }
+      if (oMap.name !== undefined) {
+        this.name = oMap.name;
+      }
+      if (oMap.location !== undefined) {
+        this.location = oMap.location;
+      }
+      if (oMap.startTime !== undefined) {
+        this.startTime = oMap.startTime;
+      }
+      if (oMap.endTime !== undefined) {
+        this.endTime = oMap.endTime;
+      }
+      if (oMap.coefficient !== undefined) {
+        this.coefficient = oMap.coefficient;
+      }
+    }// oMap
+  }// constructor
+  public get base_prefix():string {
+    return 'GVT';
+  }
+  public create_id():  string{
+    var n = Math.floor(10000.0*Math.random());
+    var sn = '' + n;
+    while (sn.length < 4){
+      sn = '0' + sn;
+    }
+    var s:string = (this.date.toISOString()).substr(0,10);
+    return this.base_prefix + '-' + this.profaffectationid + '-' +
+     this.genre + '-' + s + '-' + sn;
+  }// create_id
+  public get type(): string {
+    return 'groupeevent';
+  }
+  public get collection_name(): string {
+    return 'groupeevents';
+  }
+  //
+  public get profaffectationid(): string {
+    return this._profaff;
+  }
+  public set profaffectationid(s: string) {
+    if ((s !== undefined) && (s !== null) && (s.trim().length > 0)) {
+      this._profaff = s;
+    } else {
+      this._profaff = null;
+    }
+  }
+
+  public get name(): string {
+    return this._name;
+  }
+  public set name(s: string) {
+    if ((s !== undefined) && (s !== null) && (s.trim().length > 0)) {
+      this._name = s.trim().toLowerCase();
+    } else {
+      this._name = null;
+    }
+  }
+
+  //
+  public get location(): string {
+    return this._location;
+  }
+  public set location(s: string) {
+    if ((s !== undefined) && (s !== null) && (s.trim().length > 0)) {
+      this._location = s.trim().toLowerCase();
+    } else {
+      this._location = null;
+    }
+  }
+
+  //
+  public get startTime(): Date {
+    return this._start;
+  }
+  public set startTime(d: Date) {
+    this._start = BaseItem.check_date(d);
+  }
+
+  //
+  public get endTime(): Date {
+    return this._end;
+  }
+  public set endTime(d: Date) {
+    this._end = BaseItem.check_date(d);
+  }
+
+  //
+  public get enseignantid(): string {
+    return this._prof;
+  }
+  public set enseignantid(s: string) {
+    if ((s !== undefined) && (s !== null) && (s.trim().length > 0)) {
+      this._prof = s;
+    } else {
+      this._prof = null;
+    }
+  }
+  public get has_enseignantid(): boolean {
+    return (this.enseignantid !== null);
+  }
+  //
+  public get coefficient(): number {
+    return this._coef;
+  }
+  public set coefficient(s: number) {
+    if ((s !== undefined) && (s !== null) && (s > 0)) {
+      this._coef = s;
+    } else {
+      this._coef = null;
+    }
+  }
+  public get has_coefficient(): boolean {
+    return (this.coefficient !== null);
+  }
+  //
+  public get is_storeable(): boolean {
+    return (this.type !== null) && (this.collection_name !== null) &&
+      (this.departementid !== null) && (this.anneeid !== null)
+       && (this.semestreid !== null) &&
+      (this.uniteid !== null) && (this.matiereid !== null) &&
+       (this.groupeid !== null) &&
+      (this.genre !== null) && (this.date !== null) &&
+      (this.profaffectationid !== null) && (this.enseignantid !== null) &&
+      (this.lastname !== null) && (this.firstname !== null) &&
+      (this.name !== null);
+  }
+  public to_insert_map(oMap: any): void {
+    super.to_insert_map(oMap);
+      oMap.profaffectationid = this.profaffectationid;
+      oMap.enseignantid = this.enseignantid;
+      oMap.name = this.name;
+      oMap.location = this.location;
+      oMap.coefficient = this.coefficient;
+      oMap.startTime = this.startTime;
+      oMap.endTime = this.endTime;
+  }// to_insert_map
+
+}// class GroupeEvent
+export = GroupeEvent;
