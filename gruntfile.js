@@ -22,9 +22,14 @@ module.exports = function (grunt) {
             test: {
                 path: 'http://localhost:3000/test.html',
                 app: 'chrome'
+            },
+            dev: {
+                path: 'http://localhost:3000/index.html',
+                app: 'chrome'
             }
         }
 
     });
-    grunt.registerTask('default', ['connect', 'open:test','watch']);
+    grunt.registerTask('test', ['connect', 'open:test','watch']);
+    grunt.registerTask('default', ['connect', 'open:dev','watch']);
 }

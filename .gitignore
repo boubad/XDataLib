@@ -28,6 +28,7 @@ node_modules
 .c9
 .zedstate
 src/app/data/**/*.js
+src/app/viewmodels/**/*.js
 src/test/**/*.js
 spec/**/*.js
 xxx
