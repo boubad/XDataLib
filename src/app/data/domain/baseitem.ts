@@ -6,12 +6,14 @@ class BaseItem implements InfoData.IBaseItem {
   public rev: string;
   public attachments: any;
   public avatarid: string;
+  public description: string;
   //
   constructor(oMap?: any) {
     this.id = null;
     this.rev = null;
     this.attachments = null;
     this.avatarid = null;
+    this.description = null;
     if ((oMap !== undefined) && (oMap !== null)) {
       if (oMap._id !== undefined) {
         this.id = oMap._id;
@@ -19,13 +21,16 @@ class BaseItem implements InfoData.IBaseItem {
       if (oMap._rev !== undefined) {
         this.rev = oMap._rev;
       }
-      if (oMap.avatarid !== undefined) {
-        this.avatarid = oMap.avatarid;
-      }
       if (oMap._attachments !== undefined) {
         this.attachments = oMap._attachments;
       }
-    }
+      if (oMap.description !== undefined) {
+        this.description = oMap.description
+      }
+      if (oMap.avatarid !== undefined) {
+        this.avatarid = oMap.avatarid;
+      }
+    }// oMap
   }// constructor
   public get base_prefix(): string {
     return null;
@@ -66,12 +71,17 @@ class BaseItem implements InfoData.IBaseItem {
   public to_insert_map(oMap: any): void {
     if ((this.id !== undefined) && (this.id !== null)) {
       oMap._id = this.id;
+    } else {
+      oMap._id = this.create_id();
     }
     if ((this.rev !== undefined) && (this.rev !== null)) {
       oMap._rev = this.rev;
     }
     if ((this.type !== undefined) && (this.type !== null)) {
       oMap.type = this.type;
+    }
+    if ((this.description !== undefined) && (this.description !== null)){
+      oMap.description = this.description;
     }
     if ((this.avatarid !== undefined) && (this.avatarid !== null)) {
       oMap.avatarid = this.avatarid;

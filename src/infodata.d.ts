@@ -1,6 +1,11 @@
 //infodata.d.ts
-/// <reference path='../typings/q/Q.d.ts' />
+/// <reference path='../typings/bluebird/bluebird.d.ts' />
 //
+export interface IObjectStore {
+  get_value : (key:string) => any;
+  store_value: (key:string, value:any) => any;
+  remove_value : (key: string) => any;
+}// interface IObjectStore
 export interface IMenuDesc {
   refer: string;
   title: string;
@@ -19,8 +24,6 @@ export interface IElementDesc {
   startDate?: Date;
   endDate?: Date;
   hasUrl: boolean;
-  //
-  check_url: (server?: any) => Q.Promise<string>
 }
 export interface IBaseItem {
   id: string;
@@ -30,6 +33,7 @@ export interface IBaseItem {
   collection_name: string;
   index_name: string;
   avatarid: string;
+  description:string;
   //
   create_id: () => string;
   base_prefix: string;
@@ -40,7 +44,6 @@ export interface IBaseItem {
   //
   sigle?: string;
   name?: string;
-  description?: string;
   departementid?: string;
   anneeid?: string;
   semestreid?: string;
@@ -91,23 +94,32 @@ export interface IBaseItem {
   check_password?: (ct: string) => boolean;
   change_password?: (ct: string) => void;
 }// interface IBaseItem
+export interface IItemGenerator {
+  create_item : (oMap?:any) => IBaseItem;
+  convert_items: (dd: any[]) => IBaseItem[]
+}// interface IItemGenerator
+export interface ISigleNameItem extends IBaseItem{
+  sigle:string;
+  name:string;
+}// interface ISigleNameItem
+export interface IDepartement extends ISigleNameItem {
+
+}// interface ISigleNameItem
 export interface IDatabaseManager {
-  create_item: (oMap: any) => IBaseItem;
-  get_item_by_id: (id: string) => Q.Promise<IBaseItem>;
-  get_items_array: (ids: string[]) => Q.Promise<IBaseItem[]>;
-  maintains_one_item: (item: IBaseItem) => Q.Promise<IBaseItem>;
-  maintains_items: (items: IBaseItem[]) => Q.Promise<IBaseItem[]>;
-  remove_items: (items: IBaseItem[]) => Q.Promise<boolean>
-  remove_one_item: (item: IBaseItem) => Q.Promise<boolean>;
-  find_person_by_username: (username: string) => Q.Promise<IBaseItem>;
+  get_item_by_id: (id: string) => Promise<IBaseItem>;
+  get_items_array: (ids: string[]) => Promise<IBaseItem[]>;
+  maintains_one_item: (item: IBaseItem) => Promise<IBaseItem>;
+  maintains_items: (items: IBaseItem[]) => Promise<any>;
+  remove_items: (items: IBaseItem[]) => Promise<any>
+  remove_one_item: (item: IBaseItem) => Promise<any>;
+  find_person_by_username: (username: string) => Promise<IBaseItem>;
   maintains_attachment: (item: IBaseItem, attachmentId: string,
-  attachment: any, type: string) => Q.Promise<boolean>;
-  get_attachment: (item: IBaseItem, attachmentId: string) => Q.Promise<any>;
-  get_docid_attachment: (docid: string, attachmentId: string) => Q.Promise<any>;
-  remove_attachment: (item: IBaseItem, attachmentId: string) => Q.Promise<boolean>;
+  attachment: any, type: string) => Promise<any>;
+  get_docid_attachment: (docid: string, attachmentId: string) => Promise<any>;
+  remove_attachment: (item: IBaseItem, attachmentId: string) => Promise<any>;
   find_elements_range: (viewName: string, startKey?: any, endKey?: any,
   skip?: number, limit?: number,
   descending?: boolean, bIncludeEnd?: boolean,
-  bDoc?: boolean, bAttach?: boolean) => Q.Promise<IElementDesc[]>;
+  bDoc?: boolean, bAttach?: boolean) => Promise<IElementDesc[]>;
   //
 }// interface IDatabaseManager

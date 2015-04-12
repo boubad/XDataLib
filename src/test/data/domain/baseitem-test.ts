@@ -1,4 +1,4 @@
-//baseitem.spec.ts
+//baseitem.test.ts
 /// <reference path="../../../../typings/qunit/qunit.d.ts"/>
 //
 import BaseItem = require("../../../app/data/domain/baseitem");

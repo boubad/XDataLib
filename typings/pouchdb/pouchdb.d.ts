@@ -2,7 +2,7 @@
 // Project: http://pouchdb.com
 // Definitions by: Bill Sears <https://github.com/MrBigDog2U/>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
-/// <reference path='../q/Q.d.ts' />
+/// <reference path='../bluebird/bluebird.d.ts' />
 
 interface PouchError {
 	status: number;
@@ -21,7 +21,7 @@ interface PouchApi {
 	type(): string;
 	id(): string;
 	//close(callback: () => void): void;
-	close : () => Q.IPromise<any>;
+	close : () => Promise<any>;
 }
 
 interface PouchInfoResponse {
@@ -35,7 +35,7 @@ interface PouchInfoResponse {
 
 interface PouchApi {
 //	info(callback: (err: PouchError, res: PouchInfoResponse) => void): void;
-	info: () => Q.IPromise< PouchInfoResponse>;
+	info: () => Promise< PouchInfoResponse>;
 }
 interface PouchAjaxOptions {
 	cache?: boolean;
@@ -102,8 +102,8 @@ interface PouchApi {
 	//
 	// get == select by id
 	//
-	get : (id:string, opts?:PouchGetOptions) => Q.IPromise<PouchGetResponse>;
-	allDocs : (opts?: PouchAllDocsOptions) => Q.IPromise<PouchAllDocsResponse>;
+	get : (id:string, opts?:PouchGetOptions) => Promise<PouchGetResponse>;
+	allDocs : (opts?: PouchAllDocsOptions) => Promise<PouchAllDocsResponse>;
 	/*
 	get(id: string, opts: PouchGetOptions, callback: (err: PouchError, res: PouchGetResponse) => void): void;
 	get(id: string, callback: (err: PouchError, res: PouchGetResponse) => void): void;
@@ -125,9 +125,8 @@ interface PouchUpdateResponse {
 	id: string;
 	rev: string;
 }
-
 interface PouchApi {
-	bulkDocs : (req: PouchBulkDocsRequest,opts?: PouchUpdateOptions) => Q.IPromise<PouchUpdateResponse[]>;
+	bulkDocs : (req: any[],opts?: PouchUpdateOptions) => Promise<PouchUpdateResponse[]>;
 	/*
 	bulkDocs(req: PouchBulkDocsRequest, opts: PouchUpdateOptions, callback: (err: PouchError, res: PouchUpdateResponse[]) => void): void;
 	bulkDocs(req: PouchBulkDocsRequest, callback: (err: PouchError, res: PouchUpdateResponse[]) => void): void;
@@ -135,7 +134,7 @@ interface PouchApi {
 	//
 	// post == insert (doc does not contain an _id)
 	//
-	post : (doc: any, opts?: PouchUpdateOptions) => Q.IPromise<PouchUpdateResponse>;
+	post : (doc: any, opts?: PouchUpdateOptions) => Promise<PouchUpdateResponse>;
 	/*
 	post(doc: any, opts: PouchUpdateOptions, callback: (err: PouchError, res: PouchUpdateResponse) => void): void;
 	post(doc: any, callback: (err: PouchError, res: PouchUpdateResponse) => void): void;
@@ -143,7 +142,7 @@ interface PouchApi {
 	//
 	// put == update (doc DOES contain an _id)
 	//
-	put: (doc: any, opts?: PouchUpdateOptions) => Q.IPromise<PouchUpdateResponse>;
+	put: (doc: any, opts?: PouchUpdateOptions) => Promise<PouchUpdateResponse>;
 	/*
 	put(doc: any, opts: PouchUpdateOptions, callback: (err: PouchError, res: PouchUpdateResponse) => void): void;
 	put(doc: any, callback: (err: PouchError, res: PouchUpdateResponse) => void): void;
@@ -151,7 +150,7 @@ interface PouchApi {
 	//
 	// remove == delete
 	//
-	remove : (doc: any, opts?: PouchUpdateOptions) => Q.IPromise<PouchUpdateResponse>;
+	remove : (doc: any, opts?: PouchUpdateOptions) => Promise<PouchUpdateResponse>;
 	/*
 	remove(doc: any, opts: PouchUpdateOptions, callback: (err: PouchError, res: PouchUpdateResponse) => void): void;
 	remove(doc: any, callback: (err: PouchError, res: PouchUpdateResponse) => void): void;
@@ -179,8 +178,8 @@ interface PouchApi {
 	//
 	// query == select by other criteria
 	//
-	query : (fun: string | PouchFilter, opts?: PouchQueryOptions) => Q.IPromise<PouchQueryResponse>;
-	//query : (fun:PouchFilter, opts?: PouchQueryOptions) => Q.IPromise<PouchQueryResponse>;
+	query : (fun:any, opts?: PouchQueryOptions) => Promise<PouchQueryResponse>;
+	//query : (fun:PouchFilter, opts?: PouchQueryOptions) => Promise<PouchQueryResponse>;
 	/*
 	query(fun: string, opts: PouchQueryOptions, callback: (err: PouchError, res: PouchQueryResponse) => void): void;
 	query(fun: string, callback: (err: PouchError, res: PouchQueryResponse) => void): void;
@@ -194,9 +193,9 @@ interface PouchAttachmentOptions {
 }
 
 interface PouchApi {
-	getAttachment: (docId:string,attachmentId:string,opts?: PouchAttachmentOptions) => Q.IPromise<any>;
-	putAttachment: (docId:string,attachmentId:string,docRev:string,attachment:any,type:string) => Q.IPromise<PouchUpdateResponse>;
-	removeAttachment : (docId:string, attachmentId:string,docRev:string) => Q.IPromise<PouchUpdateResponse>;
+	getAttachment: (docId:string,attachmentId:string,opts?: PouchAttachmentOptions) => Promise<any>;
+	putAttachment: (docId:string,attachmentId:string,docRev:string,attachment:any,type:string) => Promise<PouchUpdateResponse>;
+	removeAttachment : (docId:string, attachmentId:string,docRev:string) => Promise<PouchUpdateResponse>;
 	/*
 	getAttachment(id: string, opts: PouchAttachmentOptions, callback: (err: PouchError, res: any) => void): void;
 	getAttachment(id: string, callback: (err: PouchError, res: any) => void): void;
@@ -272,7 +271,7 @@ interface PouchReplicate {
 }
 
 interface PouchApi {
-	revsDiff : (req: any,opts?: PouchRevsDiffOptions) => Q.IPromise<any>;
+	revsDiff : (req: any,opts?: PouchRevsDiffOptions) => Promise<any>;
 	replicate: PouchReplicate;
 	/*
 	revsDiff(req: any, opts: PouchRevsDiffOptions, callback: (missing: any) => void): void;
