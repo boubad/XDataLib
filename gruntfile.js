@@ -1,5 +1,9 @@
-var port = process.env.PORT || '3000';
-var host = process.env.IP || 'localhost';
+//var port = process.env.PORT || '3000';
+//var host = process.env.IP || 'localhost';
+var port = process.env.PORT;
+var host = process.env.IP;
+var testurl = 'http://' + host + ':' + port + '/test.html';
+var devurl = 'http://' + host + ':' + port + '/index.html';
 module.exports = function (grunt) {
    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-connect');
@@ -20,11 +24,11 @@ module.exports = function (grunt) {
        },
         open: {
             test: {
-                path: 'http://localhost:3000/test.html',
+                path: testurl,
                 app: 'chrome'
             },
             dev: {
-                path: 'http://localhost:3000/index.html',
+                path: devurl,
                 app: 'chrome'
             }
         }
