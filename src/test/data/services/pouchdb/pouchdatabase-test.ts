@@ -11,7 +11,7 @@ var databaseUrl:string = 'http://localhost:5984/geninfo';
 var main = () =>{
   test ('PouchDatabase constructor tests',(assert)=>{
     var done = assert.async();
-     var data = new PouchDatabase(databaseUrl);
+     var data = new PouchDatabase();
      data.db.then((xdb)=>{
        ok((xdb !== undefined) && (xdb !== null),'Database opened');
        done();
@@ -26,7 +26,7 @@ var main = () =>{
   test('PouchDatabase maintains_doc',(assert)=>{
     var done = assert.async();
     var doc = {_id: 'testDocID', data:'bla'};
-    var data = new PouchDatabase(databaseUrl);
+    var data = new PouchDatabase();
     data.maintains_doc(doc).then((r)=>{
       ok((r !== undefined) && (r !== null));
       ok((r.ok !== undefined) && (r.ok !== null) && (r.ok == true));

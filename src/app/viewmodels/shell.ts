@@ -2,6 +2,7 @@
 /// <reference path="../../../typings/durandal/durandal.d.ts"/>
 import router = require('plugins/router');
 import app = require('durandal/app');
+import dataService = require('../data/services/dataservice');
 //
 class ShellClass {
   public router:DurandalRouter;
@@ -16,7 +17,11 @@ class ShellClass {
         { route: 'administration', title:'Administration', moduleId: 'viewmodels/welcome', nav: false },
         { route: 'flickr', moduleId: 'viewmodels/flickr', nav: true }
     ]).buildNavigationModel();
-    return router.activate();
+    dataService.check_admin().then((x)=>{
+      return router.activate();
+    },(err)=>{
+      return router.activate();
+    });
   }// activate
   public search() : any {
     //It's really easy to show a message box.

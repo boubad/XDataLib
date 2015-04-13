@@ -7,6 +7,7 @@ import PouchDB = require("pouchdb");
 import InfoData = require("../../../../infodata.d");
 import ItemGenerator = require("../itemgenerator");
 import ElementDesc = require("../../domain/elementdesc");
+import Person = require('../../domain/person');
 //
 var DEFAULT_DATABASE: string = 'geninfo';
 //
@@ -57,6 +58,43 @@ class PouchDatabase implements InfoData.IDatabaseManager {
       }// open
     });
   }// db
+  //
+  public check_admin(): Promise<any> {
+    /*
+     var pPers = new Person();
+         pPers.username = 'admin';
+         pPers.lastname = 'System';
+         pPers.firstname = 'Administrator';
+         pPers.roles = ['super','admin','oper','prof','etud','reader'];
+         pPers.reset_password();
+         var oMap = {};
+         pPers.to_insert_map(oMap);
+         return this.maintains_doc(oMap);
+         */
+    
+    return this.db.then((xdb)=>{
+      return xdb.get('PER-admin');
+    }).then((p:PouchGetResponse)=>{
+      return p;
+    },(e)=>{
+      if (e.status == 404){
+         var pPers = new Person();
+         pPers.username = 'admin';
+         pPers.lastname = 'System';
+         pPers.firstname = 'Administrator';
+         pPers.roles = ['super','admin','oper','prof','etud','reader'];
+         pPers.reset_password();
+         var oMap = {};
+         pPers.to_insert_map(oMap);
+         return this.maintains_doc(oMap).then((z)=>{
+           return null;
+         });
+      } else {
+        return null;
+      }
+    });
+    
+  }// check_admin
   //
   public get_item_by_id(id: string): Promise<InfoData.IBaseItem> {
     return this.db.then((xdb) => {
