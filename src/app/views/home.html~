@@ -8,8 +8,8 @@
           <span data-bind="text: fullname"></span>
         </strong>
       </div>
-      <div class="col-xs-1" data-bind="visible: hasPhoto">
-        <img data-bind="attr: {src: photoUrl}" height='48' />
+      <div class="col-xs-1" data-bind="visible: hasPhotoUrl()">
+        <img data-bind="attr: {src: userPhotoUrl()}" height='48' />
       </div>
     </div>
       <div class="row" data-bind="foreach: menu">

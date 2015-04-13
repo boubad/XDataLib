@@ -52,7 +52,6 @@
         "./src/app/data/utils/sessionstore.ts",
         "./src/app/viewmodels/flickr.ts",
         "./src/app/viewmodels/home.ts",
-        "./src/app/viewmodels/info.ts",
         "./src/app/viewmodels/shell.ts",
         "./src/app/viewmodels/welcome.ts",
         "./src/infodata.d.ts",

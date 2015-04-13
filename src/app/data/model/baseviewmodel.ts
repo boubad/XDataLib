@@ -12,9 +12,24 @@ class BaseViewModel {
   //
   public _info:UserInfo;
   //
+  public fullname:KnockoutObservable<string>;
+  public photoUrl:KnockoutObservable<string>;
+  public isConnected:KnockoutObservable<boolean>;
+  public isAdmin:KnockoutObservable<boolean>;
+  //
+  public hasPhoto:KnockoutComputed<boolean>;
+  //
    constructor(){
       this._info = new UserInfo();
       this.menu = ko.observableArray([]);
+      this.fullname = ko.observable(null);
+      this.photoUrl = ko.observable(null);
+      this.isConnected = ko.observable(false);
+      this.isAdmin = ko.observable(false);
+      this.hasPhoto = ko.computed(()=>{
+        var x = this.photoUrl();
+        return (x !== null);
+      },this);
    }// constructor
    public get userInfo(): UserInfo {
      if ((this._info === undefined) || (this._info === null)){
