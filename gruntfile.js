@@ -4,7 +4,7 @@ module.exports = function (grunt) {
    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-open');
-  //  grunt.loadNpmTasks('grunt-execute');
+    grunt.loadNpmTasks('grunt-execute');
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         connect: {
@@ -27,9 +27,14 @@ module.exports = function (grunt) {
                 path: 'http://localhost:3000/index.html',
                 app: 'chrome'
             }
+        },
+        execute: {
+            target: {
+                src: ['server/www.js']
+            }
         }
 
     });
     grunt.registerTask('test', ['connect', 'open:test','watch']);
-    grunt.registerTask('default', ['connect', 'open:dev','watch']);
+    grunt.registerTask('default', ['execute']);
 }
