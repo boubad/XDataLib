@@ -16,6 +16,14 @@
     "url": "https://github.com/boubad/XDataLib/issues"
   },
   "homepage": "https://github.com/boubad/XDataLib",
+  "dependencies": {
+   "cookie-parser": "*",
+   "debug": "*",
+   "express": "*",
+   "jade": "*",
+   "morgan": "*",
+   "serve-favicon": "*"
+ },
   "devDependencies": {
     "grunt": "*",
     "grunt-execute":"*" ,

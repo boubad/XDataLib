@@ -11,6 +11,9 @@ class ShellClass {
   public activate(): any {
     router.map([
         { route: '', title:'Welcome', moduleId: 'viewmodels/welcome', nav: true },
+        { route: 'welcome', title:'Welcome', moduleId: 'viewmodels/welcome', nav: false },
+        { route: 'home', title:'Accueil', moduleId: 'viewmodels/home', nav: true },
+        { route: 'administration', title:'Administration', moduleId: 'viewmodels/welcome', nav: false },
         { route: 'flickr', moduleId: 'viewmodels/flickr', nav: true }
     ]).buildNavigationModel();
     return router.activate();

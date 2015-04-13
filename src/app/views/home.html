@@ -1,0 +1,43 @@
+<section>
+  <div class = "container">
+    <div data-bind="if: isConnected">
+        <div class="row">
+      <div class="col-xs-9"/>
+      <div class="col-xs-1">
+        <strong>
+          <span data-bind="text: fullname"></span>
+        </strong>
+      </div>
+      <div class="col-xs-1" data-bind="visible: hasPhoto">
+        <img data-bind="attr: {src: photoUrl}" height='48' />
+      </div>
+    </div>
+      <div class="row" data-bind="foreach: menu">
+          <div class="col-sm-3 col-md-1">
+            <a href="#" class="thumbnail" data-bind="click:$parent.select">
+                  <img style="width: 130px; height: 90px;" data-bind="attr: { src: img_source }"/>
+                  <span data-bind="text: title"></span>
+              </a>
+          </div>
+      </div>
+    </div>
+    <div data-bind="ifnot: isConnected" class="row">
+        <div class="col-xs-3">
+        <form role="form">
+          <div class="form-group">
+            <label for="username">Identifiant:</label>
+            <input type="text" class="form-control" id="username"
+                   data-bind="value: username" placeholder="Identifiant" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Mot de passe:</label>
+            <input type="password" class="form-control" id="password" data-bind="value: password" placeholder="Mot de passe" required />
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary" data-bind="visible: canConnect(), click: connect">Connexion</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
