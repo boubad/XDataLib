@@ -7,10 +7,12 @@ export interface IObjectStore {
   remove_value: (key: string) => any;
 }// interface IObjectStore
 export interface IMenuDesc {
-  refer: string;
   title: string;
+  refer?: string;
   desc?: string;
   img_source?: string;
+  action?: string;
+  parent?:any
 }// interface IMenuDesc
 
 export interface IElementDesc {
