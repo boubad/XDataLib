@@ -3,7 +3,6 @@
 //
 import InfoData = require('../../../infodata');
 import SessionObjectStore = require("../utils/sessionstore");
-import dataService = require('../services/dataservice');
 import Person = require('../domain/person');
 import EtudiantPerson = require('../domain/etudperson');
 import ProfPerson = require('../domain/profperson');
@@ -17,6 +16,24 @@ class UserInfo extends SessionObjectStore {
   constructor() {
     super();
   }// constructor
+  public get description():string {
+    return this.get_value('description');
+  }
+  public set description(s:string){
+    this.store_value('description',s);
+  }
+  public get phone():string {
+    return this.get_value('phone');
+  }
+  public set phone(s:string){
+    this.store_value('phone',s);
+  }
+  public get email():string {
+    return this.get_value('email');
+  }
+  public set email(s:string){
+    this.store_value('email',s);
+  }
   public get fullname():string {
     return this.get_value('fullname');
   }
@@ -83,6 +100,12 @@ class UserInfo extends SessionObjectStore {
   public set personid(s:string){
     this.store_value('personid',s);
   }
+  public get personrev():string {
+    return this.get_value('personrev');
+  }
+  public set personrev(s:string) {
+    this.store_value('personrev',s);
+  }
   //
   public get person(): InfoData.IPerson {
     var oMap = this.get_value('person');
@@ -109,6 +132,7 @@ class UserInfo extends SessionObjectStore {
   public set person(pPers: InfoData.IPerson) {
     var p: InfoData.IPerson = (pPers !== undefined) ? pPers : null;
     this.personid = null;
+    this.personrev = null;
     this.departementid = null;
     this.anneeid = null;
     this.semestreid = null;
@@ -119,28 +143,19 @@ class UserInfo extends SessionObjectStore {
     this.lastname = null;
     this.fullname = null;
     this.photoUrl = null;
+    this.email = null;
+    this.phone = null;
+    this.description = null;
     if ((p !== null) && (p.id !== null)) {
-      var oMap = {};
-      p.to_fetch_map(oMap);
-      this.store_value('person',oMap);
       var id = p.id;
       this.personid = id;
+      this.personrev = p.rev;
       this.firstname = p.firstname;
       this.lastname = p.lastname;
       this.fullname = p.fullname;
-      var avatarid = pPers.avatarid;
-      if (avatarid !== null) {
-         dataService.get_docid_attachment(id, avatarid).then((data) => {
-          if ((data !== undefined) && (data !== null)) {
-            if ((window !== undefined) && (window.URL !== undefined) &&
-              (window.URL.createObjectURL !== undefined)) {
-              try {
-                this.photoUrl = window.URL.createObjectURL(data);
-              } catch (e) { }
-            }
-          }
-        });
-      }// avatarId
+      this.email = p.email;
+      this.phone = p.phone;
+      this.description = p.description;
     }// pPers
   }
 }// class UserInfo

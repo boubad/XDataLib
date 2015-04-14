@@ -30,5 +30,4 @@ node_modules
 src/app/data/**/*.js
 src/app/viewmodels/**/*.js
 src/test/**/*.js
-spec/**/*.js
-xxx
+*.*-workspace

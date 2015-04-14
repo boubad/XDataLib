@@ -1,0 +1,68 @@
+<section>
+  <span class="page-header" data-bind="text: title"> </span>
+  <span data-bind="visible: hasErrorMessage, text: errorMessage" class="text-danger"></span>
+   <span data-bind="visible: hasInfoMessage, text: infoMessage" class="text-success"></span>
+    <div class="row">
+      <div class="col-xs-9"/>
+      <div class="col-xs-1">
+        <strong>
+          <span data-bind="text: fullname"></span>
+        </strong>
+      </div>
+      <div class="col-xs-1" data-bind="visible: hasPhoto">
+        <img data-bind="attr: {src: photoUrl}" height='48' />
+      </div>
+    </div>
+    <div class="row" data-bind="foreach: menu">
+          <div class="col-sm-3 col-md-1">
+            <a href="#" class="thumbnail" data-bind="click:$parent.select_menu">
+                  <img style="width: 130px; height: 90px;" data-bind="attr: { src: image }"/>
+                  <span data-bind="text: title"></span>
+              </a>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4">
+      <form role="form">
+              <div class="form-group">
+                <label for="newpwd">Nouveau mot de passe:</label>
+         <input type="password" class="form-control" id="newpwd" data-bind="value: newPassword"
+          placeholder="Nouveau mot de passe"/>
+        </div>
+             <div class="form-group">
+              <label for="confirmpwd">Confirmation nouveau mot de passe:</label>
+          <input type="password" class="form-control" id="confirmpwd" data-bind="value: confirmPassword"
+           placeholder="Confirmation mot de passe"/>
+             </div>
+      <div class="form-group">
+        <label for="lastname">Nom de famille:</label>
+        <input type="text" class="form-control" id="lastname" data-bind="value: lastname"
+         placeholder="Nom de famille" required />
+      </div>
+      <div class="form-group">
+        <label for="firstname">Prénom(s):</label>
+        <input type="text" class="form-control" id="firstname" data-bind="value: firstname"
+         placeholder="Prénom(s)" required />
+      </div>
+      <div class="form-group">
+        <label for="email">Courriel:</label>
+        <input type="email" class="form-control" id="email" data-bind="value: email"
+         placeholder="Adresse courriel" required />
+      </div>
+      <div class="form-group">
+        <label for="phone">Téléphone:</label>
+        <input type="text" class="form-control" id="phone" data-bind="value: phone"
+         placeholder="Téléphone" required />
+      </div>
+      <div class="form-group">
+        <label for="description">Remarques:</label>
+        <textarea class="form-control" id="description" data-bind="value: description"></textarea>
+      </div>
+      <div class="btn-group">
+         <button type="button" class="btn btn-primary" data-bind="visible: canChangePwd(), click: changePwd">Changer mot de passe</button>
+        <button type="button" class="btn btn-primary" data-bind="visible: canSave(), click: save">Modifier</button>
+      </div>
+    </form>
+  </div>
+  </div>
+</section>

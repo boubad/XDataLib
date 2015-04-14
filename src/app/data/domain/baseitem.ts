@@ -9,6 +9,7 @@ class BaseItem implements InfoData.IBaseItem {
   public description: string;
   //
   constructor(oMap?: any) {
+    //
     this.id = null;
     this.rev = null;
     this.attachments = null;

@@ -17,18 +17,19 @@
   },
   "homepage": "https://github.com/boubad/XDataLib",
   "dependencies": {
-   "cookie-parser": "*",
-   "debug": "*",
-   "express": "*",
-   "jade": "*",
-   "morgan": "*",
-   "serve-favicon": "*"
- },
+    "cookie-parser": "*",
+    "debug": "*",
+    "express": "*",
+    "jade": "*",
+    "morgan": "*",
+    "serve-favicon": "*"
+  },
   "devDependencies": {
     "grunt": "*",
-    "grunt-execute":"*" ,
-    "grunt-contrib-watch":"*",
-    "grunt-contrib-connect":"*",
-    "grunt-open":"*"
+    "grunt-contrib-connect": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-execute": "*",
+    "grunt-open": "*",
+    "typescript-tools": "^0.3.1"
   }
 }

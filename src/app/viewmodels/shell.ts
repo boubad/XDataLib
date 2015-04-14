@@ -11,9 +11,10 @@ class ShellClass {
   }// constructor
   public activate(): any {
     router.map([
-        { route: '', title:'Welcome', moduleId: 'viewmodels/welcome', nav: true },
+        { route: '', title:'Accueil', moduleId: 'viewmodels/home', nav: true },
         { route: 'welcome', title:'Welcome', moduleId: 'viewmodels/welcome', nav: false },
-        { route: 'home', title:'Accueil', moduleId: 'viewmodels/home', nav: true },
+        { route: 'home', title:'Accueil', moduleId: 'viewmodels/home', nav: false },
+        { route: 'profil', title:'Profil', moduleId: 'viewmodels/profil', nav: true },
         { route: 'administration', title:'Administration', moduleId: 'viewmodels/welcome', nav: false },
         { route: 'flickr', moduleId: 'viewmodels/flickr', nav: true }
     ]).buildNavigationModel();

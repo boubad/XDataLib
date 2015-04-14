@@ -7,6 +7,7 @@ import ko = require('knockout');
 import UserInfo = require('../data/model/userinfo');
 import BaseViewModel = require('../data/model/baseviewmodel');
 import dataService = require('../data/services/dataservice');
+import MenuDesc = require('../data/domain/menudesc');
 import shell = require('./shell');
 import app = require('durandal/app');
 //
@@ -61,63 +62,26 @@ class HomeClass extends BaseViewModel {
       }// ok
     });
   }// connect
-  public select(item?:InfoData.IMenuDesc) : any {
-    if ((item !== undefined) && (item !== null)){
-       if ((item.action !== undefined) && (item.action !== null)){
-          var action:string = item.action;
-          if (action == 'disconnect'){
-            app.showMessage('Voulez-vous vraiment quitter?',
-            'InfoApp', ['Oui', 'Non']).then((r)=>{
-              if (r == 'Oui'){
-                var pp = item.parent;
-                var userinfo = pp.userInfo;
-                userinfo.person = null;
-                pp.fullname(null);
-                pp.photoUrl(null);
-                pp.isAdmin(false);
-                pp.isConnected(false);
-                pp.username(null);
-                pp.password(null);
-                //router.navigate('#welcome');
-              }
-            });
-          } else if (action == 'admin'){
-               router.navigate('#administration');
-          } else if (action == 'profil'){
-              router.navigate('#profil');
-          }
-       }// action
-    }// item
-  }// select
+  public disconnect() : any {
+     return app.showMessage('Voulez-vous vraiment quitter?','InfoApp',['Oui','Non']).then((r)=>{
+      if (r == 'Oui'){
+        this.username(null);
+    this.password(null);
+    return super.disconnect();
+      }
+      });
+  }
   public update_menu(): any {
     var mm:InfoData.IMenuDesc[] = [];
     if (this.isConnected()){
-      mm.push({
-        refer:'#profil',
-        title: 'Profil',
-        desc: 'Profil utilisateur',
-        img_source: 'images/profil.jpg',
-        action: 'profil',
-        parent: this
-      });
+      mm.push(new MenuDesc('profil','Profil','images/profil.jpg'));
       if (this.isAdmin()){
-        mm.push({
-          refer:'#administration',
-          title: 'Administration',
-          desc: 'Administration',
-          img_source: 'images/administration.png',
-          action: 'admin',
-          parent: this
-        });
+        mm.push(new MenuDesc('administration','Administration','images/administration.png'));
       }
-      mm.push({
-        refer:'#disconnect',
-        title: 'Déconnecter',
-        desc: 'Déconnecter',
-        img_source: 'images/disconnect.jpg',
-        action: 'disconnect',
-        parent: this
-      });
+      mm.push(new MenuDesc('disconnect','Déconnecter','images/disconnect.jpg',
+        this,(p:HomeClass) => {
+           p.disconnect();
+          }));
     }
     this.menu(mm);
   }// update_menu
