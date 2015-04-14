@@ -5,10 +5,18 @@ var http = require('http');
 /**
  * Get port from environment and store in Express.
  */
-
+var port = null;
+var host = null;
+if (process.env.PORT && process.env.IP ){
+  port = process.env.PORT;
+  host = process.env.IP;
+} else {
+  port = 3000;
+  host = 'localhost';
+}
 //var port = normalizePort(process.env.PORT || '3000');
-var port = process.env.PORT || 3000;
-var host = process.env.IP || 'localhost';
+//var port = process.env.PORT || 3000;
+//var host = process.env.IP || 'localhost';
 //var port = process.env.PORT;
 //var host = process.env.IP;
 app.set('port', port);
