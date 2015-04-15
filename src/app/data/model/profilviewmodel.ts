@@ -140,7 +140,7 @@ class ProfilViewModel extends BaseViewModel {
     var xinfo = this.userInfo;
     var self = this;
     var id = xinfo.personid;
-    dataService.get_item_by_id(id).then((p:InfoData.IPerson)=>{
+    dataService.get_item_by_id(id,true).then((p:InfoData.IPerson)=>{
     		if ((p !== undefined) && (p !== null)) {
     			p.change_password(x2);
     			dataService.maintains_one_item(p).then((r)=>{
@@ -219,7 +219,7 @@ class ProfilViewModel extends BaseViewModel {
    var xinfo = this.userInfo;
    var id = xinfo.personid;
    this.clear_error();
-   return dataService.get_item_by_id(id).then((p:InfoData.IPerson)=>{
+   return dataService.get_item_by_id(id,true).then((p:InfoData.IPerson)=>{
    	 if ((p !== undefined ) && (p !== null)){
    	 		p.firstname = self.firstname();
    	 		p.lastname = self.lastname();
