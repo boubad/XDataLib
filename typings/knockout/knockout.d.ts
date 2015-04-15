@@ -70,7 +70,7 @@ interface KnockoutComputedStatic {
 
 interface KnockoutComputed<T> extends KnockoutObservable<T>, KnockoutComputedFunctions<T> {
 	fn: KnockoutComputedFunctions<any>;
-	
+
 	dispose(): void;
 	isActive(): boolean;
 	getDependenciesCount(): number;
@@ -174,6 +174,11 @@ interface KnockoutBindingHandlers {
 
 	// Components (new for v3.2)
 	component: KnockoutBindingHandler;
+	// file upload
+	fileInput : KnockoutBindingHandler;
+	fileDrag : KnockoutBindingHandler;
+	customFileInput: KnockoutBindingHandler;
+    fileBindings?: any;
 }
 
 interface KnockoutMemoization {
@@ -404,6 +409,7 @@ interface KnockoutTemplateEngine extends KnockoutNativeTemplateEngine {
 /////////////////////////////////
 
 interface KnockoutStatic {
+    fileBindings?: any;
     utils: KnockoutUtils;
     memoization: KnockoutMemoization;
 

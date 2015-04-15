@@ -7,8 +7,11 @@ import InfoData = require('../../../infodata');
 import ko = require('knockout');
 import UserInfo = require('./userinfo');
 import shell = require('../../viewmodels/shell');
+import app = require('durandal/app');
 //
 var router = shell.router;
+//
+declare var window:any;
 //
 class BaseViewModel {
   //
@@ -23,10 +26,10 @@ class BaseViewModel {
   public _info:UserInfo;
   //
   public fullname:KnockoutObservable<string>;
-  public photoUrl:KnockoutObservable<string>;
   public isConnected:KnockoutObservable<boolean>;
   public isAdmin:KnockoutObservable<boolean>;
   //
+  public photoUrl:KnockoutComputed<string>;
   public hasPhoto:KnockoutComputed<boolean>;
   //
    constructor(){
@@ -36,10 +39,22 @@ class BaseViewModel {
       this.errorMessage = ko.observable(null);
       this.infoMessage = ko.observable(null);
       this.fullname = ko.observable(null);
-      this.photoUrl = ko.observable(null);
       this.isConnected = ko.observable(false);
       this.isAdmin = ko.observable(false);
       //
+      this.photoUrl = ko.computed({
+        read: ()=>{
+          return this._info.photoUrl;
+        },
+        write : (s:string) =>{
+            var old = this._info.photoUrl;
+            if (old !== null){
+              window.URL.revokeObjectURL(old);
+            }
+            this._info.photoUrl = s;
+          },
+          owner: this
+        });
       this.hasErrorMessage = ko.computed(()=>{
         var x = this.errorMessage();
         return ((x !== null) && (x.trim().length > 0));

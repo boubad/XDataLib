@@ -96,9 +96,13 @@ class PouchDatabase implements InfoData.IDatabaseManager {
     
   }// check_admin
   //
-  public get_item_by_id(id: string): Promise<InfoData.IBaseItem> {
+  public get_item_by_id(id: string,bAttachments?:boolean): Promise<InfoData.IBaseItem> {
     return this.db.then((xdb) => {
-      return xdb.get(id);
+      if ((bAttachments !== undefined) && (bAttachments !== null) && (bAttachments == true)){
+          return xdb.get(id,{attachments:true});
+        } else {
+          return xdb.get(id);
+        }
     }).then((doc) => {
         return this.create_item(doc);
       }, (err: PouchError) => {

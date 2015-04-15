@@ -75,6 +75,9 @@ class BaseItem implements InfoData.IBaseItem {
     } else {
       oMap._id = this.create_id();
     }
+    if ((this.attachments !== undefined) && (this.attachments !== null)){
+      oMap._attachments = this.attachments;
+    }
     if ((this.rev !== undefined) && (this.rev !== null)) {
       oMap._rev = this.rev;
     }

@@ -9,6 +9,7 @@
         'jquery': '../lib/jquery/jquery-1.9.1',
         'bluebird': '../lib/bluebird/bluebird.min',
         'pouchdb':'../lib/pouchdb/pouchdb-3.3.1.min',
+        'helpers': './helpers',
         'domain':'./data/domain',
         'services': './data/services',
         'model': './data/model'
@@ -24,8 +25,8 @@
     }
 });
 
-define(['bluebird','durandal/system', 'durandal/app', 'durandal/viewLocator'],
- function (Promise,system, app, viewLocator) {
+define(['bluebird','helpers/kohelpers','durandal/system', 'durandal/app', 'durandal/viewLocator'],
+ function (Promise,ko,system, app, viewLocator) {
     //>>excludeStart("build", true);
     system.debug(true);
     //>>excludeEnd("build");

@@ -276,7 +276,7 @@ export interface IEtudEvent extends IBaseEvent {
 //
 export interface IDatabaseManager {
   check_admin: () => Promise<any>;
-  get_item_by_id: (id: string) => Promise<IBaseItem>;
+  get_item_by_id: (id: string,bAttachments?:boolean) => Promise<IBaseItem>;
   get_items_array: (ids: string[]) => Promise<IBaseItem[]>;
   maintains_one_item: (item: IBaseItem) => Promise<IBaseItem>;
   maintains_items: (items: IBaseItem[]) => Promise<any>;
