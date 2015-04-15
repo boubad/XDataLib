@@ -83,12 +83,9 @@ define(["require", "exports", 'jquery', 'knockout'], function (require, exports,
                 if (fileData.dataURL && ko.isObservable(fileData.dataURL)) {
                 }
                 else {
-                    fileData.dataURL = ko.observable(); // hack
+                    fileData.dataURL = ko.observable();
                 }
             }
-            // var properties = ['binaryString', 'text', 'dataURL', 'arrayBuffer'], property;
-            // for(var i = 0; i < properties.length; i++){
-            //     property = properties[i];
             ['binaryString', 'text', 'dataURL', 'arrayBuffer'].forEach(function (property) {
                 var method = 'readAs' + (property.substr(0, 1).toUpperCase() + property.substr(1));
                 if (property != 'dataURL' && !(fileData[property] && ko.isObservable(fileData[property]))) {
@@ -147,7 +144,6 @@ define(["require", "exports", 'jquery', 'knockout'], function (require, exports,
             if (ko.utils.unwrapObservable(valueAccessor()) === false) {
                 return;
             }
-            //*
             var sysOpts = fileBindings.customFileInputSystemOptions;
             var defOpts = fileBindings.defaultOptions;
             var $element = $(element);
@@ -208,7 +204,6 @@ define(["require", "exports", 'jquery', 'knockout'], function (require, exports,
             }
         }
     };
-    //
     ko.fileBindings = fileBindings;
     return fileBindings;
 });
